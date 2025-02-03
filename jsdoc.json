@@ -1,14 +1,29 @@
 {
     "source": {
-      "include": ["index.js", "router-movies.js", "router-users.js", "auth.js", "models.js", "passport.js"],
+      "include": [
+        "index.js",
+        "router-movies.js",
+        "router-users.js",
+        "auth.js",
+        "models.js",
+        "passport.js"
+      ],
       "includePattern": ".js$",
       "excludePattern": "(node_modules/|docs/)"
     },
     "opts": {
       "destination": "./docs",
       "recurse": true,
-      "readme": "README.md"
+      "readme": "README.md",
+      "template": "node_modules/jsdoc-template",
+      "tutorials": "docs/tutorials"
     },
-    "plugins": ["plugins/markdown"]
+    "plugins": [
+      "plugins/markdown"
+    ],
+    "templates": {
+      "cleverLinks": true,
+      "monospaceLinks": true
+    }
   }
   
