@@ -9,6 +9,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 const auth = require("./auth");
 const routerUser = require("./router-users.js");
 const routerMovies = require("./router-movies");
