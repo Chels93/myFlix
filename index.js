@@ -121,7 +121,7 @@ routerMovies(app);
  */
 app.get("/docs", (req, res) => {
   console.log("Serving documentation.html");
-  res.redirect("/documentation.html");
+  res.sendFile(path.resolve(__dirname, "public", "documentation.html"));
 });
 
 app.use(express.static("public"));
