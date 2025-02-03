@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+</head>
+
+<body>
+  <h1>Featured Flicks API</h1>
+  <p>The web application allows users to access detailed information about featured films, including casts, <br>
+    producers, directors, and genres. Users will be able to create a personal account, and will have the <br>
+    abilitiy to customize their own list of favorite movies and a wish list of movies they would like to watch.
+  </p>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>Business Logic</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Returns a list of all movies to the user</td>
+        <td>/movies</td>
+        <td>Get</td>
+        <td>None</td>
+        <td>Json object holding data about all movies</td>
+      </tr>
+      <tr>
+        <td>Returns data about a single movie by title to the user</td>
+        <td>/movies/[title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>Json object holding data about a single movie, containing: year, genre, and director, and using the
+          following
+          structure:
+          <code>
+            {
+              "movieId": "00000",
+              "Title": "Movie Title Here",
+              "Synopsis": "Movie Description Here",
+              "ImagePath": "image.png",
+              "Year": "0000",
+              "Director": {
+                "DirectorId": "0000",
+                "Name": "Director Name",
+                "Bio": "Biography of director here.",
+                "BirthYear": "0000",
+                "DeathYear": "0000",
+              },
+              "Genre": {
+                "GenreId": "0000"
+                "Name": "Genre here",
+                "Description": "Description of genre here."
+              }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Returns data about a genre by name/title</td>
+        <td>/movies/genres/[genreName]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>Json object holding data about a single genre and it's description, using the following structure:
+          <code>
+            {
+              "GenreId": "0000",
+              "Name": "Genre Name",
+              "Description": "Description of genre here."
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Returns data about a director by name, containing: bio, birth year, and death year, and using the following
+          structure:
+          <code>
+            {
+              "DirectorId": "00000",
+              "Name": "Director Name",
+              "Bio": "Direcotry biography here.",
+              "Birth Year": "0000",
+              "Death Year": "0000"
+            }
+          </code>
+        </td>
+        <td>/movies/directors/[directorName]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>Json object holding data about a single director, containing: director name, bio, birth year, and death
+          year.</td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>Json object holding data about user to add, using the following structure:
+          <code>
+            {
+              ID: Integer,
+              userName: String,
+              Password: String, 
+              email: String,
+              birthdate: Date,
+              favoriteMovies: String,
+            }
+          </code>
+        </td>
+        <td>Json object holding data about user that was added (including ID), using the following structure:
+          <code>
+            {
+              "__id": "00aaa0000a0000a0",
+              "userName": "TestUser",
+              "Password": "0000",
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [],
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Allows users to update their user info</td>
+        <td>users/[Username]</td>
+        <td>PUT</td>
+        <td>Json object holding data about the user info that needs updating, using the following structure:
+          <code>
+            {
+              Username: req.body.Username,
+              Password: req.body.Password,
+              Email: req.body.Email,
+              Birthday: req.body.Birthday,
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Allows users to add a movie to their list of favorites</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>Json object holding data about the updated list of favorites, using the following structure:
+          <code>
+            {
+              "__id": "00aaa0000a0000a0",
+              "userName": "TestUser"
+              "Password": "0000",
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [
+                "1", "2", "3"
+              ]
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Allows users to remove a movie from their list of favorites</td>
+        <td>/users/[Username]/movies/[movieID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>Json object holding data about the updated list of favorites, using the following structure:
+          <code>
+            {
+              "__id": "00aaa0000a0000a0",
+              "userName": "TestUser"
+              "Password": "0000",
+              "email": "test@email.com",
+              "birthdate": "0000-00-00"
+              "favoriteMovies": [
+                "1", "2"
+              ]
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Allows existing users to deregister</td>
+        <td>/users/[Username]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message showing that a user has been removed.</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
