@@ -23,11 +23,6 @@ module.exports = (app) => {
    * @route GET /users
    * @group Users - User management
    * @security jwt
-   * @url /users
-   * @method GET
-   * @businessLogic Fetches all users from the database.
-   * @response 200 - An array of user objects
-   * @response 500 - Internal server error
    * @returns {object[]} 200 - An array of user objects
    * @returns {object} 500 - Internal server error
    */
@@ -50,20 +45,13 @@ module.exports = (app) => {
    * Registers a new user and returns the user data along with a JWT token
    * @route POST /users
    * @group Users - User management
-   * @url /users
-   * @method POST
-   * @businessLogic Registers a new user and generates a JWT token for the user.
    * @param {object} req.body - The request body
    * @param {string} req.body.username - The username of the new user
    * @param {string} req.body.password - The password of the new user
    * @param {string} req.body.email - The email address of the new user
    * @param {string} req.body.birthdate - The birthdate of the new user in (YYYY-MM-DD)
-   * @response 201 - A JSON object containing the created user data and a JWT token
-   * @response 400 - Missing required fields or user already exists
-   * @response 422 - Validation errors
-   * @response 500 - Internal server error
-   * @returns {object} 201 - A JSON object containing the created user data and a JWT token
-   * @returns {object} 400 - Missing required fields or user already exists
+   * @returns {object} 201 - A JSON object containing the cretaed user data and a JWT token
+   * @returns {object} 400 - Missing required fields or user already existsw
    * @returns {object} 422 - Validation errors
    * @returns {object} 500 - Internal server error
    */
@@ -130,22 +118,14 @@ module.exports = (app) => {
    * Allows users to login
    * @route POST /login
    * @group Users - User authentication
-   * @url /login
-   * @method POST
-   * @businessLogic Authenticates a user and returns a JWT token if credentials are correct.
    * @param {object} req.body - The request body
    * @param {string} req.body.username - Username of the user
    * @param {string} req.body.password - Password of the user
-   * @response 200 - JSON object containing the JWT token
-   * @response 400 - Username and password required
-   * @response 401 - Invalid username or password
-   * @response 500 - Internal server error
    * @returns {object} 200 - JSON object containing the JWT token
    * @returns {object} 400 - Username and password required
-   * @returns {object} 401 - Invalid username or password
+   * @returns {object} 401 - Invalid username or passowrd
    * @returns {object} 500 - Internal server error
    */
-
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -177,25 +157,9 @@ module.exports = (app) => {
   /**
    * Allows users to update their user info
    * Requires JWT authentication
-   * @route PUT /users/:username
-   * @group Users - User management
-   * @url /users/:username
-   * @method PUT
-   * @businessLogic Updates the user data.
    * @param {string} req.params.username - The username of the user to update
    * @param {object} req.body - Data to update
-   * @param {string} req.body.username - New username (optional)
-   * @param {string} req.body.password - New password (optional)
-   * @param {string} req.body.email - New email (optional)
-   * @param {string} req.body.birthdate - New birthdate (optional)
-   * @response 200 - Updated user object
-   * @response 422 - Validation errors
-   * @response 404 - User not found
-   * @response 500 - Internal server error
-   * @returns {object} 200 - Updated user object
-   * @returns {object} 422 - Validation errors
-   * @returns {object} 404 - User not found
-   * @returns {object} 500 - Internal server error
+   * @returns {object} Updated user object
    */
   app.put(
     "/users/:username",
@@ -246,18 +210,8 @@ module.exports = (app) => {
   /**
    * Get user info by username
    * Requires JWT authentication
-   * @route GET /users/:username
-   * @group Users - User management
-   * @url /users/:username
-   * @method GET
-   * @businessLogic Fetches a user's information by username.
    * @param {string} req.params.username - The username of the user to retrieve
-   * @response 200 - User object if found
-   * @response 404 - User not found
-   * @response 500 - Internal server error
-   * @returns {object} 200 - User object if found
-   * @returns {object} 404 - User not found
-   * @returns {object} 500 - Internal server error
+   * @returns {object} User object if found
    */
   app.get(
     "/users/:username",
@@ -279,18 +233,8 @@ module.exports = (app) => {
   /**
    * Get favorite movies for a specific user
    * Requires JWT authentication
-   * @route GET /users/:username/favoriteMovies
-   * @group Users - User management
-   * @url /users/:username/favoriteMovies
-   * @method GET
-   * @businessLogic Fetches the favorite movies of a user.
    * @param {string} req.params.username - The username of the user
-   * @response 200 - Array of favorite movie objects
-   * @response 404 - User not found
-   * @response 500 - Internal server error
-   * @returns {Array<object>} 200 - Array of favorite movie objects
-   * @returns {object} 404 - User not found
-   * @returns {object} 500 - Internal server error
+   * @returns {Array<object>} Array of favorite movie objects
    */
   app.get(
     "/users/:username/favoriteMovies",
@@ -316,17 +260,9 @@ module.exports = (app) => {
   /**
    * Allows users to add a movie to their list of favorites
    * Requires JWT authentication
-   * @route POST /users/:username/movies/:movieId
-   * @group Users - User management
-   * @url /users/:username/movies/:movieId
-   * @method POST
-   * @businessLogic Adds a movie to the user's favorites list.
    * @param {string} req.params.username - The username of the user
    * @param {string} req.params.movieId - The ID of the movie
-   * @response 200 - Updated user object
-   * @response 500 - Internal server error
-   * @returns {object} 200 - Updated user object
-   * @returns {object} 500 - Internal server error
+   * @returns {object} Updated user object
    */
   app.post(
     "/users/:username/movies/:movieId",
@@ -350,19 +286,9 @@ module.exports = (app) => {
   /**
    * Allows users to remove a movie from their list of favorites
    * Requires JWT authentication
-   * @route DELETE /users/:username/movies/:movieId
-   * @group Users - User management
-   * @url /users/:username/movies/:movieId
-   * @method DELETE
-   * @businessLogic Removes a movie from the user's favorites list.
    * @param {string} req.params.username - The username of the user
    * @param {string} req.params.movieId - The ID of the movie
-   * @response 200 - Updated user object
-   * @response 404 - User not found
-   * @response 500 - Internal server error
-   * @returns {object} 200 - Updated user object
-   * @returns {object} 404 - User not found
-   * @returns {object} 500 - Internal server error
+   * @returns {object} Updated user object
    */
   app.delete(
     "/users/:username/movies/:movieId",
@@ -388,18 +314,14 @@ module.exports = (app) => {
 
   /**
    * Allows existing users to deregister
-   * @route DELETE /users/:username
-   * @group Users - User management
-   * @url /users/:username
-   * @method DELETE
-   * @businessLogic Deletes a user from the database.
+  * @route DELETE /users/:username
+  * @group Useers - User managment 
+  * @security jwt
    * @param {string} req.params.username - The username of the user
-   * @response 200 - Confirmation message
-   * @response 404 - User not found
-   * @response 500 - Internal server error
-   * @returns {string} 200 - A message confirming deletion
-   * @returns {object} 404 - User not found
-   * @returns {object} 500 - Internal server error
+   * @returns {string} Confirmation message
+  * @returns {object} 200 - A messaGe confirming deletion 
+  * @returns {object} 404 - User not found 
+  * @returns {object} 500 - Internal server error 
    */
   app.delete(
     "/users/:username",

@@ -16,9 +16,8 @@ module.exports = (app) => {
   );
 
   /**
-   * Get all movies
+   * Returns a JSON object of all movies
    *
-   * @description Fetches and returns a list of all movies in the database
    * @route GET /movies
    * @group Movies - Operations about movies
    * @security jwt
@@ -43,7 +42,6 @@ module.exports = (app) => {
   /**
    * Returns data about a single movie by title
    *
-   * @description Fetches and returns a movie based on its title
    * @route GET /movies/:Title
    * @group Movies - Movie-related operations
    * @security jwt
@@ -70,7 +68,6 @@ module.exports = (app) => {
   /**
    * Get movies by genre
    *
-   * @description Retrieves movies that belong to a specified genre
    * @route GET /movies/genre/:genreName
    * @group Movies - Movie-related operations
    * @security jwt
@@ -100,13 +97,12 @@ module.exports = (app) => {
   /**
    * Returns data about a director by name
    *
-   * @description Retrieves movies directed by a specified director
    * @route GET /movies/director/:directorName
    * @group Movies - Operations about movies
    * @security jwt
    * @param {string} directorName.path.required - Name of the director
    * @returns {Object[]} 200 - An array of movies by the specified director
-   * @returns {Error} 404 - Director not found
+   * @retruns {Error} 404 = Director not found
    * @returns {Error} 500 - Internal server error
    */
   app.get(
