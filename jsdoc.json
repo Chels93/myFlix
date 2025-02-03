@@ -14,9 +14,7 @@
     "opts": {
       "destination": "./public/docs",
       "recurse": true,
-      "readme": "README.md",
-      "template": "node_modules/jsdoc-template",
-      "tutorials": "docs/tutorials"
+      "readme": "README.md"
     },
     "plugins": [
       "plugins/markdown"
