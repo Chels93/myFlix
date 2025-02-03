@@ -12,7 +12,7 @@
       "excludePattern": "(node_modules/|docs/)"
     },
     "opts": {
-      "destination": "./public/docs",
+      "destination": "./docs",
       "recurse": true,
       "readme": "README.md",
       "template": "node_modules/jsdoc-template",
