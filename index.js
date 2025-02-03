@@ -28,7 +28,7 @@ const allowedOrigins = [
   "https://cinevault93.netlify.app",
   "https://chels93.github.io/CineVault-Angular-client",
   "https://chels93.github.io",
-  "http://localhost:3000", 
+  "http://localhost:3000",
   "http://localhost:4200",
 ];
 
@@ -113,17 +113,6 @@ routerUser(app);
 routerMovies(app);
 
 /**
- * Default route responding with a welcome message.
- * @function
- * @route GET /
- * @param {Request} req - The request object.
- * @param {Response} res - The response object.
- */
-app.get("/", (req, res) => {
-res.send("Welcome to MoviesDB!");
-});
-
-/**
  * Documentation redirection route.
  * @function
  * @route GET /docs
@@ -131,10 +120,21 @@ res.send("Welcome to MoviesDB!");
  * @param {Response} res - The response object.
  */
 app.get("/docs", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
-  });
+  res.sendFile(path.join(__dirname, "public", "documentation.html"));
+});
 
 app.use(express.static("public"));
+
+/**
+ * Default route responding with a welcome message.
+ * @function
+ * @route GET /
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+app.get("/", (req, res) => {
+  res.send("Welcome to MoviesDB!");
+});
 
 /**
  * Error handling middleware.
