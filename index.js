@@ -119,9 +119,9 @@ routerMovies(app);
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
-app.get("/", (req, res) => {
-  res.send("Welcome to MoviesDB!");
-});
+// app.get("/", (req, res) => {
+// res.send("Welcome to MoviesDB!");
+// });
 
 /**
  * Documentation redirection route.
