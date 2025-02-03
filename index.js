@@ -119,7 +119,7 @@ routerMovies(app);
  * @param {Request} req - The request object.
  * @param {Response} res - The response object.
  */
-app.get("/documentation.html", (req, res) => {
+app.get("/docs", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "documentation.html"));
   });
   
