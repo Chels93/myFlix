@@ -21,7 +21,7 @@ module.exports = (app) => {
    * @route GET /movies
    * @group Movies - Operations about movies
    * @security jwt
-   * @returns {Array<Object>} 200 - Array of movies
+   * @returns {Object[]} 200 - Array of movies
    * @returns {Error} 500 - Internal server error
    */
   app.get(
@@ -43,10 +43,11 @@ module.exports = (app) => {
    * Returns data about a single movie by title
    *
    * @route GET /movies/:Title
-   * @group Movies - Operations about movies
+   * @group Movies - Movie-related operations
    * @security jwt
    * @param {string} Title.path.required - Title of the movie
-   * @returns {Object} 200 - Movie object
+   * @returns {Object} 200 - A movie object
+   * @returns {Error} 404 - Movie not found
    * @returns {Error} 500 - Internal server error
    */
   app.get(
@@ -65,13 +66,14 @@ module.exports = (app) => {
   );
 
   /**
-   * Returns data about a genre by name/title
+   * Get movies by genre
    *
    * @route GET /movies/genre/:genreName
-   * @group Movies - Operations about movies
+   * @group Movies - Movie-related operations
    * @security jwt
    * @param {string} genreName.path.required - Name of the genre
-   * @returns {Object} 200 - Genre object
+   * @returns {Object[]} 200 - An array of movies in the specified genre
+   * @returns {Error} 404 - Genre not found
    * @returns {Error} 500 - Internal server error
    */
   app.get(
@@ -99,7 +101,8 @@ module.exports = (app) => {
    * @group Movies - Operations about movies
    * @security jwt
    * @param {string} directorName.path.required - Name of the director
-   * @returns {Object} 200 - Director object
+   * @returns {Object[]} 200 - An array of movies by the specified director
+   * @retruns {Error} 404 = Director not found
    * @returns {Error} 500 - Internal server error
    */
   app.get(
