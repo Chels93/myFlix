@@ -85,8 +85,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jsdoc": "^4.0.4"
-  }
+  "license": "ISC"
 }

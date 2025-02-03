@@ -20,11 +20,8 @@ module.exports = (app) => {
 
   /**
    * Returns a list of all users
-   * @route GET /users
-   * @group Users - User management
-   * @security jwt
-   * @returns {object[]} 200 - An array of user objects
-   * @returns {object} 500 - Internal server error
+   * @returns {Array<object>} Array of user objects
+   * Requires Jwt authentication
    */
   app.get(
     "/users",
@@ -43,17 +40,15 @@ module.exports = (app) => {
 
   /**
    * Registers a new user and returns the user data along with a JWT token
-   * @route POST /users
-   * @group Users - User management
-   * @param {object} req.body - The request body
-   * @param {string} req.body.username - The username of the new user
-   * @param {string} req.body.password - The password of the new user
-   * @param {string} req.body.email - The email address of the new user
-   * @param {string} req.body.birthdate - The birthdate of the new user in (YYYY-MM-DD)
-   * @returns {object} 201 - A JSON object containing the cretaed user data and a JWT token
-   * @returns {object} 400 - Missing required fields or user already existsw
-   * @returns {object} 422 - Validation errors
-   * @returns {object} 500 - Internal server error
+   *
+   * @param {object} req - The request object.
+   * @param {object} req.body - The request body.
+   * @param {string} req.body.username - The username of the new user.
+   * @param {string} req.body.password - The password of the new user.
+   * @param {string} req.body.email - The email address of the new user.
+   * @param {string} req.body.birthdate - The birthdate of the new user in YYYY-MM-DD format.
+   * @param {object} res - The response object.
+   * @returns {object} - A JSON object containing the created user data and a JWT token.
    */
   app.post(
     "/users",
@@ -116,15 +111,10 @@ module.exports = (app) => {
 
   /**
    * Allows users to login
-   * @route POST /login
-   * @group Users - User authentication
    * @param {object} req.body - The request body
    * @param {string} req.body.username - Username of the user
    * @param {string} req.body.password - Password of the user
-   * @returns {object} 200 - JSON object containing the JWT token
-   * @returns {object} 400 - Username and password required
-   * @returns {object} 401 - Invalid username or passowrd
-   * @returns {object} 500 - Internal server error
+   * @returns {object} JWT token
    */
   app.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -314,14 +304,9 @@ module.exports = (app) => {
 
   /**
    * Allows existing users to deregister
-  * @route DELETE /users/:username
-  * @group Useers - User managment 
-  * @security jwt
+   * Requires JWT authentication
    * @param {string} req.params.username - The username of the user
    * @returns {string} Confirmation message
-  * @returns {object} 200 - A messaGe confirming deletion 
-  * @returns {object} 404 - User not found 
-  * @returns {object} 500 - Internal server error 
    */
   app.delete(
     "/users/:username",
