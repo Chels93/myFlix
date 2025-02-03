@@ -130,8 +130,8 @@ app.get("/", (req, res) => {
  * @param {Response} res - The response object.
  */
 app.get("/docs", (req, res) => {
-  res.redirect("/documentation.html");
-});
+    res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
+  });
 
 app.use(express.static("public"));
 
